@@ -3,8 +3,14 @@ class Game {
         this.canvas = document.getElementById('keyboard')
         this.ctx = this.canvas.getContext('2d')
         this.snake = [{
-            x: 0,
-            y: 0
+            x: 60,
+            y: 60
+        }, {
+            x: 60,
+            y: 60
+        }, {
+            x: 60,
+            y: 60
         }]
         this.snake_area = 20
         this.direction = 'right'
@@ -16,26 +22,46 @@ class Game {
 
     init() {
         this.move()
-        this.ctx.fillStyle = '#000'
-        this.ctx.fillRect(this.snake[0].x, this.snake[0].y, this.snake_area, this.snake_area)
+        this.ctx.clearRect(0, 0,500, 500)
+        for (let pos of this.snake) {
+            this.ctx.fillStyle = '#77f'
+            this.ctx.fillRect(pos.x, pos.y, this.snake_area - 1, this.snake_area - 1)
+        }
         this.moved = false
     }
 
     move() {
         switch (this.direction) {
             case 'right':
-                this.snake[0].x += this.snake_area
+                this.update_snake({
+                    x: this.snake[0].x + this.snake_area,
+                    y: this.snake[0].y
+                })
                 break
             case 'left':
-                this.snake[0].x -= this.snake_area
+                this.update_snake({
+                    x: this.snake[0].x - this.snake_area,
+                    y: this.snake[0].y
+                })
                 break
             case 'up':
-                this.snake[0].y -= this.snake_area
+                this.update_snake({
+                    x: this.snake[0].x,
+                    y: this.snake[0].y - this.snake_area
+                })
                 break
             case 'down':
-                this.snake[0].y += this.snake_area
+                this.update_snake({
+                    x: this.snake[0].x,
+                    y: this.snake[0].y + this.snake_area
+                })
                 break
         }
+    }
+
+    update_snake(position) {
+        this.snake.pop()
+        this.snake.unshift(position)
     }
 }
 
@@ -49,11 +75,6 @@ document.addEventListener('keydown', (e) => {
                     game.direction = 'right'
                     game.moved = true
                 }
-                // this.snake.pop()
-                // this.snake.unshift({
-                //     x: this.snake[0].x + this.snake_area,
-                //     y: this.snake[0].y
-                // })
                 break
             case 'ArrowLeft':
                 if (game.direction !== 'right' && game.direction !== 'left') {
