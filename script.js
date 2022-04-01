@@ -2,12 +2,13 @@ class Game {
     constructor() {
         this.canvas = document.getElementById('keyboard')
         this.ctx = this.canvas.getContext('2d')
-        this.snake = []
+        this.snake = [[60, 60], [60, 60], [60, 60]]
         this.snake_area = 20
         this.direction = 'right'
         this.moved = false
+        this.food = []
 
-        this.snake.push([60, 60], [60, 60], [60, 60])
+        this.generate_food()
 
         this.interval = setInterval(() => this.init(), 1000)
     }
@@ -15,10 +16,16 @@ class Game {
     init() {
         this.move()
 
+        this.lose_conditions()
+        this.check_food()
+
         this.ctx.clearRect(0, 0, 500, 500)
         for (let pos of this.snake) {
             this.ctx.fillStyle = '#77f'
             this.ctx.fillRect(pos[0], pos[1], this.snake_area - 1, this.snake_area - 1)
+
+            this.ctx.fillStyle = '#f44'
+            this.ctx.fillRect(this.food[0], this.food[1], this.snake_area - 1, this.snake_area - 1)
         }
         
         this.moved = false
@@ -31,28 +38,24 @@ class Game {
                     this.snake[0][0] + this.snake_area,
                     this.snake[0][1]
                 ])
-                this.lose_conditions()
                 break
             case 'left':
                 this.update_snake([
                     this.snake[0][0] - this.snake_area,
                     this.snake[0][1]
                 ])
-                this.lose_conditions()
                 break
             case 'up':
                 this.update_snake([
                     this.snake[0][0],
                     this.snake[0][1] - this.snake_area
                 ])
-                this.lose_conditions()
                 break
             case 'down':
                 this.update_snake([
                     this.snake[0][0],
                     this.snake[0][1] + this.snake_area
                 ])
-                this.lose_conditions()
                 break
         }
     }
@@ -82,6 +85,18 @@ class Game {
         } catch (e) {
             alert('You lose')
             clearInterval(this.interval)
+        }
+    }
+
+    generate_food() {
+        this.food[0] = Math.floor(Math.random() * (500 / this.snake_area)) * this.snake_area
+        this.food[1] = Math.floor(Math.random() * (500 / this.snake_area)) * this.snake_area
+    }
+
+    check_food() {
+        if (this.snake[0].every((val, index) => val === this.food[index]) === true) {
+            this.generate_food()
+            this.snake.push(this.snake[this.snake.length - 1])
         }
     }
 }
