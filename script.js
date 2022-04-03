@@ -21,14 +21,20 @@ class Game {
 
         this.ctx.clearRect(0, 0, 500, 500)
         for (let pos of this.snake) {
-            this.ctx.fillStyle = '#77f'
-            this.ctx.fillRect(pos[0], pos[1], this.snake_area - 1, this.snake_area - 1)
-
-            this.ctx.fillStyle = '#f44'
-            this.ctx.fillRect(this.food[0], this.food[1], this.snake_area - 1, this.snake_area - 1)
+            this.create_rect('#77f', '#000', pos[0], pos[1])
         }
+
+        this.create_rect('#f44', '#050', this.food[0], this.food[1])
         
         this.moved = false
+    }
+
+    create_rect(color, border_color, x, y) {
+        this.ctx.fillStyle = border_color
+        this.ctx.fillRect(x, y, this.snake_area, this.snake_area)
+
+        this.ctx.fillStyle = color
+        this.ctx.fillRect(x + 1, y + 1, this.snake_area - 2, this.snake_area - 2)
     }
 
     move() {
