@@ -8,7 +8,25 @@
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
 </head>
 <body>
-    <canvas id="keyboard" width="500" height="500"></canvas>
+    <main>
+        <h1>Snake game</h1>
+        <canvas id="keyboard" width="500" height="500"></canvas>
+        <footer>
+            <div class="scores">
+                <div class="score">
+                    <h1>Score:</h1>
+                    <h1 id="score">0</h1>
+                </div>
+                <div class="score">
+                    <h1>High score:</h1>
+                    <h1 id="high_score">0</h1>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="start">Start</button>
+            </div>
+        </footer>
+    </main>
     <script src='script.js'></script>
 </body>
 </html>

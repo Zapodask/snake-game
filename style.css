@@ -8,8 +8,50 @@ body {
   height: 100vh;
   display: grid;
   place-items: center;
+
+  background: #fafafa;
+}
+
+main {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 #keyboard {
   background: #aaa;
+}
+
+footer {
+  width: 100%;
+  background: #aaa;
+  padding: 0.5rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  flex-direction: row;
+}
+
+.controls button {
+  font-size: 1rem;
+
+  padding: 0.25rem 2rem;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
 }
