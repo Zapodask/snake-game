@@ -10,22 +10,19 @@
 <body>
     <main>
         <h1>Snake game</h1>
+        <div class="scores">
+            <div class="score">
+                <h2>Score</h2>
+                <h2 id="score">0</h2>
+            </div>
+            <div class="score">
+                <h2>High score</h2>
+                <h2 id="high_score">0</h2>
+            </div>
+        </div>
         <canvas id="keyboard" width="500" height="500"></canvas>
-        <footer>
-            <div class="scores">
-                <div class="score">
-                    <h1>Score:</h1>
-                    <h1 id="score">0</h1>
-                </div>
-                <div class="score">
-                    <h1>High score:</h1>
-                    <h1 id="high_score">0</h1>
-                </div>
-            </div>
-            <div class="controls">
-                <button id="start">Start</button>
-            </div>
-        </footer>
+        <p>Use the arrow keys to move the snake</p>
+        <button id="start" class="start-btn">Start</button>
     </main>
     <script src='script.js'></script>
 </body>

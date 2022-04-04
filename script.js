@@ -12,6 +12,7 @@ class Game {
         this.score = 0
 
         this.generate_food()
+        document.getElementById('score').innerHTML = this.score
 
         this.interval = setInterval(() => this.init(), 500)
     }
